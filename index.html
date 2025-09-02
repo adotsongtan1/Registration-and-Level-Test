@@ -380,9 +380,18 @@
                             </div>
                         </div>
                         <div id="tuition-result">수강료 계산을 위해 정보를 입력해주세요.</div>
+                    <div class="form-section">
+                    <h2>오픈채팅방 링크 복사</h2>
+                    <div class="button-grid">
+                        <button type="button" onclick="copyInviteMessage('고3')">고3(07방)</button>
+                        <button type="button" onclick="copyInviteMessage('고2')">고2(08방)</button>
+                        <button type="button" onclick="copyInviteMessage('고1')">고1(09방)</button>
+                        <button type="button" onclick="copyInviteMessage('중등')">중등(중등방)</button>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
         </main>
 
         <!-- 3. Right Panel (Result) -->
@@ -793,7 +802,7 @@
         printStyles.innerHTML = `
             @page { size: A4; margin: 1cm; }
             body { 
-                margin: 0; padding: 0; font-size: 9.5pt;
+                margin: 0; padding: 0; font-size: 9pt;
                 -webkit-print-color-adjust: exact !important; 
                 print-color-adjust: exact !important;
             }
@@ -806,18 +815,18 @@
                 background-color: #004aad !important;
                 color: white !important;
             }
-            .result-header h1 { font-size: 22pt !important; /* 제목 폰트 크기 증가 */}
+            .result-header h1 { font-size: 20pt !important; /* 제목 폰트 크기 증가 */}
     .student-info { 
         grid-template-columns: repeat(4, 1fr);
-        font-size: 15pt !important; /* 학생 정보 폰트 크기 증가 */
+        font-size: 13pt !important; /* 학생 정보 폰트 크기 증가 */
     }
     .total-summary h3 {
-        font-size: 15pt !important; /* 총평 제목 폰트 크기 증가 */
+        font-size: 13pt !important; /* 총평 제목 폰트 크기 증가 */
     }
     .total-summary p {
-        font-size: 13pt !important;}
+        font-size: 11pt !important;}
     .result-table td {
-    font-size: 13pt !important; /* 원하시는 크기로 조절하세요 */
+    font-size: 11pt !important; /* 원하시는 크기로 조절하세요 */
 }
         `;
         printWindow.document.head.appendChild(printStyles);
@@ -841,6 +850,7 @@
             resultDiv.textContent = '수강료 계산을 위해 모든 정보를 입력해주세요.';
             return;
         }
+      
 
         const level = levelElement.value;
         const totalDays = totalDaysElement.value;
@@ -876,6 +886,40 @@
             }
         });
     };
+  
+  function copyInviteMessage(grade) {
+        // 각 학년별 오픈채팅방 링크 (실제 링크로 교체해야 합니다)
+        const links = {
+            '고3': 'https://open.kakao.com/o/ggWdyOeh',
+            '고2': 'https://open.kakao.com/o/gmyLyOeh',
+            '고1': 'https://open.kakao.com/o/g1nlzOeh',
+            '중등': 'https://open.kakao.com/o/gH7JzOeh'
+        };
+
+        // 복사할 메시지 형식
+        const message = `안녕! 에이닷 영어학원이야. 반가워✨\n\n${grade} 오픈채팅방 링크야!! 학원 공지 및 다양한 소식을 전달할 예정이니 꼭 들어와줘!!\n\n오픈채팅방 링크 🔗 ${links[grade]}\n\n이름 설정 : 00T/000`;
+
+        // 클립보드에 복사
+        navigator.clipboard.writeText(message).then(() => {
+            // 복사 성공 시 알림 표시
+            const toast = document.getElementById('toast');
+            if(toast) {
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 2000);
+            }
+        }).catch(err => {
+            console.error('클립보드 복사 실패:', err);
+            alert('링크 복사에 실패했습니다.');
+        });
+    }
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
