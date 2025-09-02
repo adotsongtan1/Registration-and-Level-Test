@@ -791,7 +791,7 @@
 
         const printStyles = printWindow.document.createElement('style');
         printStyles.innerHTML = `
-            @page { size: A4; margin: 1.5cm; }
+            @page { size: A4; margin: 1cm; }
             body { 
                 margin: 0; padding: 0; font-size: 9.5pt;
                 -webkit-print-color-adjust: exact !important; 
@@ -806,8 +806,19 @@
                 background-color: #004aad !important;
                 color: white !important;
             }
-            .result-header h1 { font-size: 16pt; }
-            .student-info { grid-template-columns: repeat(4, 1fr); }
+            .result-header h1 { font-size: 22pt !important; /* 제목 폰트 크기 증가 */}
+    .student-info { 
+        grid-template-columns: repeat(4, 1fr);
+        font-size: 15pt !important; /* 학생 정보 폰트 크기 증가 */
+    }
+    .total-summary h3 {
+        font-size: 15pt !important; /* 총평 제목 폰트 크기 증가 */
+    }
+    .total-summary p {
+        font-size: 13pt !important;}
+    .result-table td {
+    font-size: 13pt !important; /* 원하시는 크기로 조절하세요 */
+}
         `;
         printWindow.document.head.appendChild(printStyles);
         
@@ -866,15 +877,5 @@
         });
     };
 </script>
-
 </body>
-
 </html>
-
-
-
-
-
-
-
-
